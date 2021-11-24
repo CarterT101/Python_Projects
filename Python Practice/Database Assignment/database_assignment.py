@@ -29,8 +29,6 @@ for file in fileList:
     if file.endswith('.txt'):
         txtList.append(file)
 
-print(txtList)
-
 conn = sqlite3.connect('files.db')
 
 with conn:
