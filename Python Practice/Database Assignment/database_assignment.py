@@ -35,15 +35,7 @@ with conn:
     conn.commit()
 conn.close()
 
-conn = sqlite3.connect('files.db')
 
-with conn:
-    cur = conn.cursor()
-    cur.execute("SELECT col_file FROM tbl_files") #selecting column from table
-    varFiles = cur.fetchall()
-    for item in varFiles:
-        listitems = "First Document: {}\nSecond Document: {}".format(item[0],item[1])
-    print(listitems)
 
 
                 
