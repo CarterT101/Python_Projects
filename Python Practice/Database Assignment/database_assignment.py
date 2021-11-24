@@ -10,6 +10,7 @@ import sqlite3
 
 conn = sqlite3.connect('files.db')
 
+
 with conn:
     cur = conn.cursor()
     cur.execute("CREATE TABLE IF NOT EXISTS tbl_files( \
@@ -20,23 +21,17 @@ with conn:
 conn.close()
 
 
-
 fileList = ('information.docx','Hello.txt','myImage.png','myMovie.mpg','World.txt','data.pdf','myPhoto.jpg')
 
-txtList = []
-
-for file in fileList:
-    if file.endswith('.txt'):
-        txtList.append(file)
 
 conn = sqlite3.connect('files.db')
 
 with conn:
     cur = conn.cursor()
-    cur.execute("INSERT INTO tbl_files(col_file) VALUES (?) ", \
-                ('{}'.format(txtList[0])))
-    cur.execute("INSERT INTO tbl_files(col_file) VALUES (?) ", \
-                ('{}'.format(txtList[1])))
+    for file in fileList:
+        if file.endswith('.txt'):
+            cur.execute("INSERT INTO tbl_files(col_file) VALUES (?)", (file,))
+            print(file)
     conn.commit()
 conn.close()
 
@@ -44,11 +39,11 @@ conn = sqlite3.connect('files.db')
 
 with conn:
     cur = conn.cursor()
-    cur.execute("SELECT * FROM tbl_files")
-    varFile = cur.fetchall()
-    for item in varFile:
-        items = "First Document: {}\nSecond Document: {}".format(item[0],item[1])
-    print(items)
+    cur.execute("SELECT col_file FROM tbl_files")
+    varFiles = cur.fetchall()
+    for item in varFiles:
+        listitems = "First Document: {}\nSecond Document: {}".format(item[0],item[1])
+    print(listitems)
 
 
                 
