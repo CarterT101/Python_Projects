@@ -176,7 +176,7 @@ def onRefresh(self):
                 varList = cursor.fetchall()[i]
                 for item in varList:
                     self.lstList1.insert(0,str(item))
-                    i = i + i
+                    i = i + 1
     conn.close()
 
 def onUpdate(self):
