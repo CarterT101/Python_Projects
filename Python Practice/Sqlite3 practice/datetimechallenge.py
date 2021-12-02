@@ -30,10 +30,20 @@ london = dt_London.strftime("%H:%M:%S")
 
 
 
-if london < opennow and london > closednow:
+if london > closednow:
     print("London location is closed")
 else:
     print("London location is open")
+
+if portland > closednow:
+    print("Portland location is closed")
+else:
+    print("Portland location is open")
+
+if newyork > closednow:
+    print("New York location is closed")
+else:
+    print("New York location is open")
 
 
 
