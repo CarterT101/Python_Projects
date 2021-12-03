@@ -12,13 +12,13 @@ class ParentWindow(Frame):
 
         def chooseSource(self):
             src=fd.askdirectory()
-            self.txtEntry.delete(0,END)
-            self.txtEntry.insert(END,src)
+            self.txtEntry1.delete(0,END)
+            self.txtEntry1.insert(END,src)
 
         def chooseDest(self):
             dest = fd.askdirectory()
-            self.txtEntry.delete(0,END)
-            self.txtEntry.insert(END,dest)
+            self.txtEntry1.delete(0,END)
+            self.txtEntry1.insert(END,dest)
         
 
 
