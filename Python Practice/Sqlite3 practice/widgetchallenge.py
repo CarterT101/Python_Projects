@@ -6,13 +6,20 @@ import tkinter as tk
 from tkinter import filedialog as fd
 
 
-import widgetchallengefunc as wc
-
-
-
 class ParentWindow(Frame):
     def __init__(self,master, *args, **kargs):
         Frame.__init__(self)
+
+        def chooseSource(self):
+            src=fd.askdirectory()
+            self.txtEntry.delete(0,END)
+            self.txtEntry.insert(END,src)
+
+        def chooseDest(self):
+            dest = fd.askdirectory()
+            self.txtEntry.delete(0,END)
+            self.txtEntry.insert(END,dest)
+        
 
 
         self.master = master
@@ -26,11 +33,11 @@ class ParentWindow(Frame):
         self.btnBrowse2 = Button(self.master, text="Browse...", width=12, height=1)
         self.btnBrowse2.grid(row=3,column=0, padx=10, pady=(5,5))
 
-        self.btnCheck = Button(self.master,text="Check for files...",width=12,height=2, command=lambda: wc.openFiles(self))
+        self.btnCheck = Button(self.master,text="Check for files...",width=12,height=2, command=lambda: chooseSource(self))
         self.btnCheck.grid(row=4,column=0,padx=10,pady=(5,10))
         
 
-        self.txtEntry1 = Entry(self.master,width=30, font=("Arial",12),textvariable=wc.ope)
+        self.txtEntry1 = Entry(self.master,width=30, font=("Arial",12))
         self.txtEntry1.grid(row=2,column=1,columnspan=4,padx=10,pady=(40,5))
 
         self.txtEntry2 = Entry(self.master,width=30, font=("Arial",12))
