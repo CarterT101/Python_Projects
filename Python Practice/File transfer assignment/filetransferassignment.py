@@ -13,30 +13,32 @@ import shutil
 class ParentWindow(Frame):
     def __init__(self,master, *args, **kargs):
         Frame.__init__(self)
-
-        secondsinday=24*60*60 #basic variables necessary for app to work
-        pattern = "\.txt"
-        now=time.time()
-        before = now - secondsinday
         
         
-        src = StringVar()
+        src = StringVar() #temp variables
         dest = StringVar()
+
 
         def chooseSource(self):
             src=fd.askdirectory()
-            self.txtEntry.delete(0,END)
-            self.txtEntry.insert(END,src)
-            return src #not sure if i need this
+            self.txtEntry.delete(0,END) #deletes text if necessary
+            self.txtEntry.insert(END,src) #inserts text
+            return src 
+
 
         def chooseDest(self):
             dest = fd.askdirectory()
             self.txtEntry1.delete(0,END)
             self.txtEntry1.insert(END,dest)
-            return dest #not sure if i need this
+            return dest 
+
 
         def fileMove(self):
-            files=glob.glob(src.get()+pattern)
+            secondsinday=24*60*60                   #basic variables necessary for app to work
+            pattern = "/*.txt"
+            now=time.time()
+            before = now - secondsinday
+            files = glob.glob(src.get() + pattern, recursive=True) #creates file path
             for i in files:
                 try:
                     mtime=os.path.getmtime(i)
@@ -44,9 +46,8 @@ class ParentWindow(Frame):
                     mtime=0
                 lastmodifieddate=datetime.datetime.fromtimestamp(mtime)
                 lmd=lastmodifieddate.timestamp()
-                if lmd < now and lmd > before:
-                    file_name=os.path.basename(i)
-                    shutil.move(i,dest.get() + file_name)
+                if lmd < now and lmd > before: #if it is between 24 hours ago and now, it will move the files
+                    shutil.move(i,dest.get()) 
         
 
         self.master = master
@@ -68,9 +69,6 @@ class ParentWindow(Frame):
 
         self.btnMove = tk.Button(self.master,width=15,height=1,text='Move Files',command=lambda:fileMove(self))
         self.btnMove.grid(row=3,column=5,padx=10,pady=(20,10),sticky=SE)
-
-
-
 
 
 
