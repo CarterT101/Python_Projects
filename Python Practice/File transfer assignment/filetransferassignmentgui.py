@@ -16,10 +16,10 @@ import filetransferassignmentfunc
 
 def load_gui(self):
     
-        self.txtEntry = tk.Entry(self.master,width=30,font=("Arial",12),textvariable=src)
+        self.txtEntry = tk.Entry(self.master,width=30,font=("Arial",12))
         self.txtEntry.grid(row=1,column=2,columnspan=4,padx=10,pady=(20,10))
 
-        self.txtEntry1 = tk.Entry(self.master,width=30,font=("Arial",12),textvariable=dest)
+        self.txtEntry1 = tk.Entry(self.master,width=30,font=("Arial",12))
         self.txtEntry1.grid(row=2,column=2,columnspan=4,padx=10,pady=(20,10))
 
         self.btnSource = tk.Button(self.master,width=15,height=1,text='Choose Source',command=lambda:filetransferassignmentfunc.chooseSource(self))

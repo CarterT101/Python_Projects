@@ -14,30 +14,31 @@ import filetransferassignment
 
 
 
-src = StringVar() #temp variables
-dest = StringVar()
+
 
 
 def chooseSource(self):
-    src=fd.askdirectory()
     self.txtEntry.delete(0,END) #deletes text if necessary
-    self.txtEntry.insert(END,src) #inserts text
+    src=fd.askdirectory()
+    self.txtEntry.insert(0,src) #inserts text
     return src 
 
 
 def chooseDest(self):
-    dest = fd.askdirectory()
     self.txtEntry1.delete(0,END)
-    self.txtEntry1.insert(END,dest)
+    dest = fd.askdirectory()
+    self.txtEntry1.insert(0,dest)
     return dest 
 
 
 def fileMove(self):
+    self.src = StringVar() #temp variables
+    self.dest = StringVar()
     secondsinday=24*60*60                   #basic variables necessary for app to work
     pattern = "/*.txt"
     now=time.time()
     before = now - secondsinday
-    files = glob.glob(src.get() + pattern, recursive=True) #creates file path
+    files = glob.glob(self.src.get() + pattern, recursive=True) #creates file path
     for i in files:
         try:
             mtime=os.path.getmtime(i)
@@ -46,7 +47,7 @@ def fileMove(self):
         lastmodifieddate=datetime.datetime.fromtimestamp(mtime)
         lmd=lastmodifieddate.timestamp()
         if lmd < now and lmd > before: #if it is between 24 hours ago and now, it will move the files
-            shutil.move(i,dest.get()) 
+            shutil.move(i,self.dest.get()) 
 
 
 

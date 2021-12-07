@@ -23,6 +23,7 @@ class ParentWindow(Frame):
         self.master.resizable(width=False, height=False)
         self.master.geometry('{}x{}'.format(450,175)) #making app box
         self.master.title('Move files')
+        arg = self.master
         
 
         filetransferassignmentgui.load_gui(self)
