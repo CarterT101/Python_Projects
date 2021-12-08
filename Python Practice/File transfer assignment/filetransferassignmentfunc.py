@@ -32,22 +32,17 @@ def chooseDest(self):
 
 
 def fileMove(self):
-    self.src = StringVar() #temp variables
-    self.dest = StringVar()
-    secondsinday=24*60*60                   #basic variables necessary for app to work
+    self.src = self.txtEntry.get() #temp variables
+    self.dest = self.txtEntry1.get()                   #basic variables necessary for app to work
     pattern = "/*.txt"
-    now=time.time()
-    before = now - secondsinday
-    files = glob.glob(self.src.get() + pattern, recursive=True) #creates file path
+    now=datetime.datetime.now()
+    before = now - datetime.timedelta(hours=24)
+    files = glob.glob(self.src + pattern) #creates file path
     for i in files:
-        try:
-            mtime=os.path.getmtime(i)
-        except OSError:
-            mtime=0
+        mtime=os.path.getmtime(i)
         lastmodifieddate=datetime.datetime.fromtimestamp(mtime)
-        lmd=lastmodifieddate.timestamp()
-        if lmd < now and lmd > before: #if it is between 24 hours ago and now, it will move the files
-            shutil.move(i,self.dest.get()) 
+        if lastmodifieddate < now and lastmodifieddate > before: #if it is between 24 hours ago and now, it will move the files
+            shutil.move(i,self.dest) 
 
 
 
